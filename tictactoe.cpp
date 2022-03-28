@@ -11,16 +11,6 @@ string board[3][3] = {
     {"\033[90;1m4\033[0m", "\033[90;1m5\033[0m", "\033[90;1m6\033[0m"},
     {"\033[90;1m7\033[0m", "\033[90;1m8\033[0m", "\033[90;1m9\033[0m"}};
 
-// AI for Tic Tac Toe checklist
-
-// 1. if i have two-in-a-row place a third and win
-// 2. if opponent has two-in-a-row place a third to block
-// 3. if no corners, go in corner
-// 4. go in center
-// 5. go in corner
-// 6. go on edge
-
-
 // displays board in cli
 void printboard()
 {
@@ -138,10 +128,11 @@ void getmove(int plynum)
         default:
         {
             cout << "Invalid location. Try again." << endl;
+            valid = false;
             continue;
         }
         }
-        if (board[row][col] != "X" && board[row][col] != "O")
+        if (board[row][col] != "\033[91;1mX\033[0m" && board[row][col] != "\033[32;1mO\033[0m")
         {
             board[row][col] = plychr;
             valid = true;
