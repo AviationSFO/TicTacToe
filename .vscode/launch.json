@@ -3,24 +3,16 @@
   "configurations": [
     {
       "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "args": [],
-      "stopAtEntry": false,
-      "cwd": "c:/Users/srwsf/Desktop/TicTacToe",
+      "stopAtEntry": true,
+      "cwd": "/Users/sweinstein/Desktop/TicTacToe",
       "environment": [],
-      "program": "c:/Users/srwsf/Desktop/TicTacToe/build/Debug/outDebug",
+      "program": "/Users/sweinstein/Desktop/TicTacToe/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "externalConsole": false,
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+      "externalConsole": false
     }
   ]
 }
