@@ -51,9 +51,9 @@ void getmove(int plynum)
     string plychr;
     bool valid = false;
     if (plynum == 0)
-        plychr = "\033[91;1mX\033[0m";
+        plychr = X;
     else
-        plychr = "\033[32;1mO\033[0m";
+        plychr = O;
 
     while (!valid)
     {
@@ -132,7 +132,7 @@ void getmove(int plynum)
             continue;
         }
         }
-        if (board[row][col] != "\033[91;1mX\033[0m" && board[row][col] != "\033[32;1mO\033[0m")
+        if (board[row][col] != X && board[row][col] != O)
         {
             board[row][col] = plychr;
             valid = true;
@@ -206,7 +206,7 @@ int main()
     {
         getmove(0);
         printboard();
-        running = checkwin("\033[91;1mX\033[0m");
+        running = checkwin(X);
         if (!running)
             break;
         turn++;
@@ -223,9 +223,9 @@ int main()
         {
             AI_move = choosemove_AI(board);
 
-            if (board[AI_move / 3][AI_move % 3] != "\033[91;1mX\033[0m" && board[AI_move / 3][AI_move % 3] != "\033[32;1mO\033[0m")
+            if (board[AI_move / 3][AI_move % 3] != X && board[AI_move / 3][AI_move % 3] != O)
             {
-                board[AI_move / 3][AI_move % 3] = "\033[32;1mO\033[0m";
+                board[AI_move / 3][AI_move % 3] = O;
                 AI_legal = true;
                 break;
             }
@@ -237,7 +237,7 @@ int main()
         }
         printboard();
 
-        running = checkwin("\033[32;1mO\033[0m");
+        running = checkwin(O);
         if (!running)
             break;
     }

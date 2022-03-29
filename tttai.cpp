@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <time.h>
 
+#define X "\033[91;1mX\033[0m"
+#define O "\033[32;1mO\033[0m"
+
 using namespace std;
 
 int choosemove_AI(string board[3][3])
@@ -14,9 +17,8 @@ int choosemove_AI(string board[3][3])
 
     bool legal = false;
 
-
-    // completes 3 in a row
-    if (board[0][0] == "\033[32;1mO\033[0m" && board[0][2] == "\033[32;1mO\033[0m")
+    // completes 3 in a row for win
+    if (board[0][0] == O && board[0][2] == O)
     {
         if (board[0][1] == "\033[90;1m2\033[0m")
         {
@@ -24,7 +26,7 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    if (board[2][0] == "\033[32;1mO\033[0m" && board[2][2] == "\033[32;1mO\033[0m")
+    else if (board[2][0] == O && board[2][2] == O)
     {
         if (board[2][1] == "\033[90;1m8\033[0m")
         {
@@ -32,7 +34,7 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    if (board[0][0] == "\033[32;1mO\033[0m" && board[2][0] == "\033[32;1mO\033[0m")
+    else if (board[0][0] == O && board[2][0] == O)
     {
         if (board[1][0] == "\033[90;1m4\033[0m")
         {
@@ -40,15 +42,15 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    if (board[0][2] == "\033[32;1mO\033[0m" && board[2][2] == "\033[32;1mO\033[0m")
+    else if (board[0][2] == O && board[2][2] == O)
     {
-        if (board[0][1] == "\033[90;1m6\033[0m")
+        if (board[1][2] == "\033[90;1m6\033[0m")
         {
             return 5;
         }
     }
 
-    if (board[0][0] == "\033[32;1mO\033[0m" && board[1][1] == "\033[32;1mO\033[0m")
+    else if (board[0][0] == O && board[1][1] == O)
     {
         if (board[2][2] == "\033[90;1m9\033[0m")
         {
@@ -56,33 +58,168 @@ int choosemove_AI(string board[3][3])
         }
     }
 
+    else if (board[1][0] == O && board[1][2] == O)
+    {
+        if (board[1][1] == "\033[90;1m5\033[0m")
+        {
+            return 4;
+        }
+    }
 
+    else if (board[0][1] == O && board[2][1] == O)
+    {
+        if (board[1][1] == "\033[90;1m5\033[0m")
+        {
+            return 4;
+        }
+    }
+
+    else if (board[1][1] == O && board[1][0] == O)
+    {
+        if (board[1][2] == "\033[90;1m6\033[0m")
+        {
+            return 5;
+        }
+    }
+
+    else if (board[1][1] == O && board[1][2] == O)
+    {
+        if (board[1][0] == "\033[90;1m4\033[0m")
+        {
+            return 3;
+        }
+    }
+
+    // defends an opponent win
+    else if (board[0][0] == X && board[0][2] == X)
+    {
+        if (board[0][1] == "\033[90;1m2\033[0m")
+        {
+            return 1;
+        }
+    }
+
+    else if (board[2][0] == X && board[2][2] == X)
+    {
+        if (board[2][1] == "\033[90;1m8\033[0m")
+        {
+            return 7;
+        }
+    }
+
+    else if (board[0][0] == X && board[2][0] == X)
+    {
+        if (board[1][0] == "\033[90;1m4\033[0m")
+        {
+            return 3;
+        }
+    }
+
+    else if (board[0][2] == X && board[2][2] == X)
+    {
+        if (board[1][2] == "\033[90;1m6\033[0m")
+        {
+            return 5;
+        }
+    }
+
+    else if (board[0][0] == X && board[1][1] == X)
+    {
+        if (board[2][2] == "\033[90;1m9\033[0m")
+        {
+            return 8;
+        }
+    }
+
+    else if (board[0][0] == X && board[0][2] == X)
+    {
+        if (board[0][1] == "\033[90;1m2\033[0m")
+        {
+            return 1;
+        }
+    }
+
+    else if (board[1][0] == X && board[1][2] == X)
+    {
+        if (board[1][1] == "\033[90;1m5\033[0m")
+        {
+            return 4;
+        }
+    }
+
+    else if (board[1][1] == X && board[1][0] == X)
+    {
+        if (board[1][2] == "\033[90;1m6\033[0m")
+        {
+            return 5;
+        }
+    }
+
+    else if (board[1][1] == X && board[1][2] == X)
+    {
+        if (board[1][0] == "\033[90;1m4\033[0m")
+        {
+            return 3;
+        }
+    }
+
+    else if (board[0][1] == X && board[1][1] == X)
+    {
+        if (board[2][1] == "\033[90;1m8\033[0m")
+        {
+            return 7;
+        }
+    }
+
+    else if (board[2][0] == X && board[1][1] == X)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
+        }
+    }
+
+    else if (board[0][0] == X && board[0][1] == X)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
+        }
+    }
+
+    else if (board[0][2] == X && board[1][1] == X)
+    {
+        if (board[2][0] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
     // going in corners
-    if (board[1][1] != "\033[91;1mX\033[0m" && board[1][1] != "\033[32;1mO\033[0m")
+    if (board[1][1] != X && board[1][1] != O)
     {
         return 4;
     }
-    else if (board[0][0] != "\033[91;1mX\033[0m" && board[0][0] != "\033[32;1mO\033[0m")
+    else if (board[0][0] != X && board[0][0] != O)
     {
         return 0;
     }
-    else if (board[2][2] != "\033[91;1mX\033[0m" && board[2][2] != "\033[32;1mO\033[0m")
+    else if (board[2][2] != X && board[2][2] != O)
     {
         return 8;
     }
-    else if (board[2][0] != "\033[91;1mX\033[0m" && board[2][0] != "\033[32;1mO\033[0m")
+    else if (board[2][0] != X && board[2][0] != O)
     {
         return 6;
     }
-    else if (board[0][2] != "\033[91;1mX\033[0m" && board[0][2] != "\033[32;1mO\033[0m")
+    else if (board[0][2] != X && board[0][2] != O)
     {
         return 2;
     }
-    else if (board[0][1] != "\033[91;1mX\033[0m" && board[0][1] != "\033[32;1mO\033[0m")
+    else if (board[0][1] != X && board[0][1] != O)
     {
         return 1;
     }
-    else if (board[2][1] != "\033[91;1mX\033[0m" && board[2][1] != "\033[32;1mO\033[0m")
+    else if (board[2][1] != X && board[2][1] != O)
     {
         return 7;
     }
@@ -92,7 +229,7 @@ int choosemove_AI(string board[3][3])
         {
             row = rand() % 3;
             col = rand() % 3;
-            if (board[row][col] != "\033[91;1mX\033[0m" && board[row][col] != "\033[32;1mO\033[0m")
+            if (board[row][col] != X && board[row][col] != O)
             {
                 legal = true;
                 break;
@@ -106,6 +243,6 @@ int choosemove_AI(string board[3][3])
         } while (!legal);
     }
 
-    int loc = (row) * 3 + (col);
+    int loc = (row)*3 + (col);
     return loc;
 }
