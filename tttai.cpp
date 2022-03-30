@@ -18,7 +18,15 @@ int choosemove_AI(string board[3][3])
     bool legal = false;
 
     // completes 3 in a row for win
-    if (board[0][0] == O && board[0][2] == O)
+    if (board[0][1] == O && board[1][1] == O)
+    {
+        if (board[2][1] == "\033[90;1m8\033[0m")
+        {
+            return 7;
+        }
+    }
+
+    else if (board[0][0] == O && board[0][2] == O)
     {
         if (board[0][1] == "\033[90;1m2\033[0m")
         {
@@ -58,6 +66,14 @@ int choosemove_AI(string board[3][3])
         }
     }
 
+    else if (board[0][0] == O && board[0][2] == O)
+    {
+        if (board[0][1] == "\033[90;1m2\033[0m")
+        {
+            return 1;
+        }
+    }
+
     else if (board[1][0] == O && board[1][2] == O)
     {
         if (board[1][1] == "\033[90;1m5\033[0m")
@@ -66,15 +82,39 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    else if (board[0][1] == O && board[2][1] == O)
+    else if (board[0][2] == O && board[1][1] == O)
     {
-        if (board[1][1] == "\033[90;1m5\033[0m")
+        if (board[2][0] == "\033[90;1m7\033[0m")
         {
-            return 4;
+            return 6;
         }
     }
 
-    else if (board[1][1] == O && board[1][0] == O)
+    else if (board[1][1] == O && board[2][1] == O)
+    {
+        if (board[0][1] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
+    else if (board[0][0] == O && board[1][0] == O)
+    {
+        if (board[2][0] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
+    else if (board[1][2] == O && board[2][2] == O)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
+        }
+    }
+
+    else if (board[1][0] == O && board[1][1] == O)
     {
         if (board[1][2] == "\033[90;1m6\033[0m")
         {
@@ -90,6 +130,38 @@ int choosemove_AI(string board[3][3])
         }
     }
 
+    else if (board[0][1] == O && board[1][1] == O)
+    {
+        if (board[2][1] == "\033[90;1m8\033[0m")
+        {
+            return 7;
+        }
+    }
+
+    else if (board[2][0] == O && board[1][1] == O)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
+        }
+    }
+
+    else if (board[0][0] == O && board[0][1] == O)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
+        }
+    }
+
+    else if (board[0][2] == O && board[1][1] == O)
+    {
+        if (board[2][0] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
     else if (board[1][0] == O && board[1][1] == O)
     {
         if (board[1][2] == "\033[90;1m6\033[0m")
@@ -98,6 +170,7 @@ int choosemove_AI(string board[3][3])
         }
     }
 
+    // defends an opponent win
     else if (board[0][1] == X && board[1][1] == X)
     {
         if (board[2][1] == "\033[90;1m8\033[0m")
@@ -106,7 +179,6 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    // defends an opponent win
     else if (board[0][0] == X && board[0][2] == X)
     {
         if (board[0][1] == "\033[90;1m2\033[0m")
@@ -184,6 +256,14 @@ int choosemove_AI(string board[3][3])
         if (board[2][0] == "\033[90;1m7\033[0m")
         {
             return 6;
+        }
+    }
+
+    else if (board[1][2] == X && board[2][2] == X)
+    {
+        if (board[0][2] == "\033[90;1m3\033[0m")
+        {
+            return 2;
         }
     }
 
