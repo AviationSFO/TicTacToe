@@ -12,8 +12,8 @@ using namespace std;
 int choosemove_AI(string board[3][3])
 {
     srand(time(NULL));
-    int row;
-    int col;
+    int row = rand() % 3;
+    int col = rand() % 3;
 
     bool legal = false;
 
@@ -87,6 +87,22 @@ int choosemove_AI(string board[3][3])
         if (board[1][0] == "\033[90;1m4\033[0m")
         {
             return 3;
+        }
+    }
+
+    else if (board[1][0] == O && board[1][1] == O)
+    {
+        if (board[1][2] == "\033[90;1m6\033[0m")
+        {
+            return 5;
+        }
+    }
+
+    else if (board[0][1] == X && board[1][1] == X)
+    {
+        if (board[2][1] == "\033[90;1m8\033[0m")
+        {
+            return 7;
         }
     }
 
@@ -194,6 +210,15 @@ int choosemove_AI(string board[3][3])
             return 6;
         }
     }
+
+    else if (board[1][0] == X && board[1][1] == X)
+    {
+        if (board[1][2] == "\033[90;1m6\033[0m")
+        {
+            return 5;
+        }
+    }
+
     // going in corners
     if (board[1][1] != X && board[1][1] != O)
     {
