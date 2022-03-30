@@ -8,7 +8,8 @@
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "macos-gcc-arm64",
-      "compilerArgs": []
+      "compilerArgs": [],
+      "compilerPath": "/usr/bin/clang"
     }
   ],
   "version": 4

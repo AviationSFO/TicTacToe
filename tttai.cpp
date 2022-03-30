@@ -163,7 +163,31 @@ int choosemove_AI(string board[3][3])
         }
     }
 
-    else if (board[1][1] == X && board[1][0] == X)
+    else if (board[0][2] == X && board[1][1] == X)
+    {
+        if (board[2][0] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
+    else if (board[1][1] == X && board[2][1] == X)
+    {
+        if (board[0][1] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
+    else if (board[0][0] == X && board[1][0] == X)
+    {
+        if (board[2][0] == "\033[90;1m7\033[0m")
+        {
+            return 6;
+        }
+    }
+
+    else if (board[1][0] == X && board[1][1] == X)
     {
         if (board[1][2] == "\033[90;1m6\033[0m")
         {
