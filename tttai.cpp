@@ -170,6 +170,14 @@ int choosemove_AI(string board[3][3])
         }
     }
 
+    else if (board[2][0] == O && board[2][1] == O)
+    {
+        if (board[2][2] == "\033[90;1m9\033[0m")
+        {
+            return 8;
+        }
+    }
+
     // defends an opponent win
     else if (board[0][1] == X && board[1][1] == X)
     {
@@ -322,6 +330,15 @@ int choosemove_AI(string board[3][3])
             return 5;
         }
     }
+
+    else if (board[2][0] == X && board[2][1] == X)
+    {
+        if (board[2][2] == "\033[90;1m9\033[0m")
+        {
+            return 8;
+        }
+    }
+
 
     // going in corners
     if (board[1][1] != X && board[1][1] != O)
