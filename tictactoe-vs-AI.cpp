@@ -204,9 +204,9 @@ int main()
         }
         turn++;
 
-        if (turn == 10)
+        if (turn == 10 || is_board_full(board))
         {
-            cout << "Tie game." << endl;
+            cout << "It's a tie!" << endl;
             break;
         }
         AI_move = -1;
@@ -224,9 +224,9 @@ int main()
             break;
         }
         turn++;
-        if (turn == 10)
+        if (turn == 10 || is_board_full(board))
         {
-            cout << "Tie game." << endl;
+            cout << "It's a tie!" << endl;
             break;
         }
     }
