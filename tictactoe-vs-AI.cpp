@@ -1,32 +1,58 @@
-// CLI Tic Tac Toe by Steven Weinstein on 3-25-2022
+// CLI Tic Tac Toe by Steven Weinstein on 4-1-2022
 #include <iostream>
 #include <string>
 #include <algorithm>
 #include <stdlib.h>
-#include "tttai.cpp"
+#include "macros.h"
+#include "minimax.cpp"
+#define BOARD_SIZE 3
+
 using namespace std;
 
 // declare board as a global variable
-string board[3][3] = {
-    {"\033[90;1m1\033[0m", "\033[90;1m2\033[0m", "\033[90;1m3\033[0m"},
-    {"\033[90;1m4\033[0m", "\033[90;1m5\033[0m", "\033[90;1m6\033[0m"},
-    {"\033[90;1m7\033[0m", "\033[90;1m8\033[0m", "\033[90;1m9\033[0m"}};
+int board[BOARD_SIZE][BOARD_SIZE] = {
+    {EMPTY, EMPTY, EMPTY},
+    {EMPTY, EMPTY, EMPTY},
+    {EMPTY, EMPTY, EMPTY}};
 
 // displays board in cli
 void printboard()
 {
     system("clear");
+    string str;
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
             if (j != 2)
             {
-                cout << board[i][j] << " | ";
+                if (board[i][j] == EMPTY)
+                {
+                    printf("\033[90;1m%d\033[0m | ", i * 3 + j + 1);
+                }
+                else if (board[i][j] == X)
+                {
+                    printf("%s | ", HUMAN);
+                }
+                else if (board[i][j] == O)
+                {
+                    printf("%s | ", AI);
+                }
             }
             else
             {
-                cout << board[i][j];
+                if (board[i][j] == EMPTY)
+                {
+                    printf("\033[90;1m%d\033[0m", i * 3 + j + 1);
+                }
+                else if (board[i][j] == X)
+                {
+                    printf("%s", HUMAN);
+                }
+                else if (board[i][j] == O)
+                {
+                    printf("%s", AI);
+                }
             }
         }
         if (i != 2)
@@ -50,10 +76,10 @@ void getmove(int plynum)
     int row;
     string plychr;
     bool valid = false;
-    if (plynum == 0)
-        plychr = X;
+    if (plynum == X)
+        plychr = HUMAN;
     else
-        plychr = O;
+        plychr = AI;
 
     while (!valid)
     {
@@ -134,7 +160,7 @@ void getmove(int plynum)
         }
         if (board[row][col] != X && board[row][col] != O)
         {
-            board[row][col] = plychr;
+            board[row][col] = plynum;
             valid = true;
             break;
         }
@@ -146,52 +172,16 @@ void getmove(int plynum)
         }
     }
 }
-bool checkwin(string player)
+bool checkwin(int player)
 {
-    if (board[0][0] == player && board[0][1] == player && board[0][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[1][0] == player && board[1][1] == player && board[1][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[2][0] == player && board[2][1] == player && board[2][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[0][0] == player && board[1][0] == player && board[2][0] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[0][1] == player && board[1][1] == player && board[2][1] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[0][2] == player && board[1][2] == player && board[2][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[0][0] == player && board[1][1] == player && board[2][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else if (board[2][0] == player && board[1][1] == player && board[0][2] == player)
-    {
-        cout << player << " WINS!" << endl;
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    return board[0][0] == player && board[0][1] == player && board[0][2] == player ||
+           board[1][0] == player && board[1][1] == player && board[1][2] == player ||
+           board[2][0] == player && board[2][1] == player && board[2][2] == player ||
+           board[0][0] == player && board[1][0] == player && board[2][0] == player ||
+           board[0][1] == player && board[1][1] == player && board[2][1] == player ||
+           board[0][2] == player && board[1][2] == player && board[2][2] == player ||
+           board[0][0] == player && board[1][1] == player && board[2][2] == player ||
+           board[0][2] == player && board[1][1] == player && board[2][0] == player;
 }
 
 int main()
@@ -201,14 +191,17 @@ int main()
     printboard();
 
     int AI_move = 0;
-
-    for (int turn = 1; turn <= 9; turn++)
+    int turn = 0;
+    while (turn <= 9)
     {
-        getmove(0);
+        getmove(X);
         printboard();
-        running = checkwin(X);
+        running = !checkwin(X);
         if (!running)
+        {
+            cout << "You win!" << endl;
             break;
+        }
         turn++;
 
         if (turn == 10)
@@ -216,30 +209,26 @@ int main()
             cout << "Tie game." << endl;
             break;
         }
-
-        bool AI_legal = false;
-
-        while (!AI_legal)
+        AI_move = -1;
+        do
         {
-            AI_move = choosemove_AI(board);
-
-            if (board[AI_move / 3][AI_move % 3] != X && board[AI_move / 3][AI_move % 3] != O)
-            {
-                board[AI_move / 3][AI_move % 3] = O;
-                AI_legal = true;
-                break;
-            }
-            else
-            {
-                AI_legal = false;
-                continue;
-            }
-        }
+            AI_move = minimax(board, O);
+        } while (AI_move == -1);
+        board[(AI_move - 1) / 3][(AI_move - 1) % 3] = O;
         printboard();
 
-        running = checkwin(O);
+        running = !checkwin(O);
         if (!running)
+        {
+            cout << "You lose." << endl;
             break;
+        }
+        turn++;
+        if (turn == 10)
+        {
+            cout << "Tie game." << endl;
+            break;
+        }
     }
     return 0;
 }
