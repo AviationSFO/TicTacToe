@@ -58,7 +58,7 @@ int score(int player, bool set_move, int board[3][3])
                 best = max(best, amount);
                 board[i][j] = EMPTY;
 
-                if (set_move == best && amount == best)
+                if (set_move && amount == best)
                 {
                     bi = i;
                     bj = j;
