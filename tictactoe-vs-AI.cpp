@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <stdlib.h>
-#include "macros.h"
+#include "macros.hpp"
 #include "minimax.cpp"
 #define BOARD_SIZE 3
 

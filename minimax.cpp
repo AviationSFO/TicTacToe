@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "macros.h"
+#include "macros.hpp"
 
 int bi, bj;
 
